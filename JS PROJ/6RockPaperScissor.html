@@ -1,0 +1,129 @@
+<!-- Here we have changed scores using JSON method.Here we are using local storage to store the scores so that the scores does not reset to 0 while refreshing the html page -->
+<html>
+    <head>
+        <title>Booleans</title>
+    </head>
+    <body>
+        <h3>Rock Paper Scissors</h3>
+
+        <button onclick="play('rock')">Rock</button>
+
+        <button onclick="play('paper')">Paper</button>
+
+        <button onclick="play('scissors')">Scissors</button>
+
+        <p class="js-result"></p>
+        <p class="js-move"></p>
+        <p class="js-score"></p>
+
+        <button onclick="
+            score.wins=0;
+            score.losses=0;
+            score.ties=0
+            localStorage.removeItem('score');
+            updatescore();
+            alert(`Score Reseted.wins:${score.wins} , looses:${score.losses} , ties:${score.ties}`)
+        ">Reset Score</button>
+
+        <script>
+
+            let score=JSON.parse(localStorage.getItem('score'));
+            if (score===null){
+                score={
+                    wins:0,
+                    losses:0,
+                    ties:0
+                }
+            };
+
+            updatescore();
+
+            // We are using localstorage.getitem() to get the score out of the localstorage
+            // Here since in local storage the values are stored as JSON file(Where the values are string).To convert the json to js format we use JSON.parse()
+
+            function play(playerMove){
+                const computerMove=rando();
+
+                let res='';
+
+                if (playerMove==='rock'){
+                    if(computerMove==='rock'){
+                        res='Tie'
+                    }
+                    else if(computerMove==='paper'){
+                        res='You Lose'
+                    }
+                    else if(computerMove==='scissors'){
+                        res='You Win'
+                    }
+                }
+                
+                else if(playerMove==='paper'){
+                    if(computerMove==='rock'){
+                        res='You Win'
+                    }
+                    else if(computerMove==='paper'){
+                        res='Tie'
+                    }
+                    else if(computerMove==='scissors'){
+                        res='You Lose'
+                    }
+                }
+
+                else if(playerMove==='scissors'){
+                    if(computerMove==='rock'){
+                    res='You Win'
+                    }
+                    else if(computerMove==='paper'){
+                        res='Tie'
+                    }
+                    else if(computerMove==='scissors'){
+                        res='You Lose'
+                    }
+                }
+
+                if (res==='You Win'){
+                    score.wins+=1;
+                }
+                else if(res==='You Lose'){
+                    score.losses+=1
+                }
+                else if(res==='Tie'){
+                    score.ties+=1
+                }
+                // Here after we update the score we store the score in local storage in json format
+                
+                // To store value in local storage we should use localstorage.setitem
+                // Local storage only accrept the value as string.Thats why we are using JSON.stringfy for score
+                localStorage.setItem('score',JSON.stringify(score));
+
+                updatescore();
+
+                document.querySelector('.js-result').innerHTML=res;
+
+                document.querySelector('.js-move').innerHTML=`You picket ${playerMove}.Compuer Picked ${computerMove}.`;
+                
+            };
+                        
+            function updatescore(){
+                document.querySelector('.js-score').innerHTML=`wins:${score.wins} , looses:${score.losses} , ties:${score.ties}`;
+            };
+
+            function rando(){
+                let computerMove='';
+                const random=Math.random();
+
+                if (random>=0 && random<1/3){
+                    computerMove='rock';
+                }
+                else if(random>=1/3 && random<2/3){
+                    computerMove='paper'
+                }
+                else if(random>=2/3 && random<1){
+                    computerMove='scissors'
+                }
+                return computerMove;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Calculator</title>
+    </head>
+    <body>
+        <p>Amazon Calculator</p>
+        <input placeholder="Cost Of Order" class="js-cost-input" onkeydown="handleCostKeyDown(event)">
+        <button onclick="calculatetotal()">Calculate</button>
+        <p class="js-total-cost"></p>
+
+        <script>
+            function handleCostKeyDown(event){
+                console.log(event.key);
+                if (event.key==='Enter'){
+                    calculatetotal();
+                }
+            }
+
+            function calculatetotal(){
+                const inputElement=document.querySelector('.js-cost-input');
+                // for input html element we need to use .value instead of .innerhtml since for input element there is no html inside. here html means(for ex text(ARE) inside the <p> tags) <p>ARE</p>
+                let cost=Number(inputElement.value);
+                if(cost<40){
+                    cost+=10
+                }
+                document.querySelector('.js-total-cost').innerHTML=`$${cost}`
+
+            }
+        </script>
+    </body>
+</html>

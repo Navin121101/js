@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Add Event Listner</title>
+    </head>
+    <body>
+        <button onclick="" class="js-button">click</button>
+    </body>
+    <script>
+        const buttonelement=document.querySelector('js-button');
+
+        // AddEventlistner lets us run some code when we interact with html element.
+        // Add event listner has two parameters.First parameter is event and second parameter is function we want to run
+        const eventlis= () => {
+            console.log('click');
+        }
+        // buttonelement.addEventListener('click',eventlis);
+        buttonelement.addEventListener('click2',eventlis);
+
+        // removeEventListner will remove the event
+        buttonelement.removeEventListener('click',eventlis);
+    </script>
+</html>

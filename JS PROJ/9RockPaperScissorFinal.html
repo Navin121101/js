@@ -1,0 +1,77 @@
+<!-- Here we have changed scores using JSON method.Here we are using local storage to store the scores so that the scores does not reset to 0 while refreshing the html page -->
+<html>
+    <head>
+        <title>Booleans</title>
+        <link rel="stylesheer" href="/JS PROJ/Styles/9RockPaperScissors.css" type="text/css">
+        <style>
+            body{
+                background-color: rgb(25,25,25);
+                color: white;
+                font-family: Arial;
+            }
+
+            h3{
+                font-size: 40px;
+                font-weight: bold;
+            }
+
+            .icon{
+                height: 50px;
+                
+            }
+
+            .movebutn{
+                background-color: transparent;
+                border: 3px solid white;
+                width: 120px;
+                height: 120px;
+                border-radius: 60px;
+                margin-right: 10px;
+                cursor: pointer;
+            }
+
+            .result{
+                font-size: 25px;
+                font-weight: bold;
+                margin-top: 50px;
+            }
+
+            .move-icon{
+                height: 40px;
+            }
+
+            .score{
+                margin-top: 50px;
+            }
+
+            button{
+                padding:8px;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Rock Paper Scissors</h3>
+
+        <button onclick="play('rock')" class="movebutn"><img class="icon" src="/JS PROJ/stone.jpeg"/></button>
+
+        <button onclick="play('paper')" class="movebutn"><img class="icon" src="/JS PROJ/paper.png"/>></button>
+
+        <button onclick="play('scissors')" class="movebutn"><img class="icon" src="/JS PROJ/scissor.png"/>></button>
+
+        <p class="js-result result"></p>
+        <p class="js-move"></p>
+        <p class="js-score score"></p>
+
+        <button onclick="
+            score.wins=0;
+            score.losses=0;
+            score.ties=0
+            localStorage.removeItem('score');
+            updatescore();
+            ">Reset Score
+        </button>
+        <button onclick="autoplay();">AutoPlay</button>
+
+        <script src="/JS PROJ/Scripts/9RockPaperScissorFinal.js"></script>
+    </body>
+</html>
